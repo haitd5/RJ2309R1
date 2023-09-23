@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>US Zip Code</title>
+    <link rel="stylesheet" href="assest/css/bootstrap.min.css">
+
+</head>
+
+<body>
+    <header>
+        <div class="container text-center pt-3">
+            <h1 class="text-uppercase text-primary">US Zip Code</h1>
+        </div>
+    </header>
+    <main>
+        <div class="container">
+            <h1>Enter a code: </h1>
+            <div class="pb-3">
+                <input type="text" onchange="getValue(this)">
+            </div>
+            <div class="py-3">
+                <button id="btnCheck" class="btn btn-primary">
+                    Click!
+                </button>
+            </div>
+            <div class="text-danger display-5">
+                <p id="result"></p>
+            </div>
+        </div>
+    </main>
+    <footer></footer>
+    <!-- <script src="assest/js/bootstrap.bundle.min.js"></script> -->
+    <script>
+        let result = document.getElementById("result");
+        let btnCheck = document.getElementById("btnCheck");
+        let code;
+
+        function getValue(obj) {
+            code = obj.value;
+        }
+
+        function isUsZipCode(str) {
+            regexp = /^[0-9]{5}(?:-[0-9]{4})?$/;
+            if (regexp.test(str)) {
+                return true;
+            }
+            return false;
+        }
+
+        btnCheck.addEventListener('click', function () {
+            if (isUsZipCode(code)) {
+                result.innerHTML = "The value is US zip code";
+            } else {
+                result.innerHTML = "The value is not US zip code"
+            }
+        })
+
+    </script>
+</body>
+
+</html>
