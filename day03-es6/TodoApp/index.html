@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To do app</title>
+    <link rel="stylesheet" href="assest/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <section class="d-flex justify-content-center align-items-center">
+            <div class="row col-md-6">
+                <h6 class="fs-6 text-success">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam amet eligendi repellendus quidem voluptate necessitatibus distinctio sapiente excepturi. Quisquam tenetur magni sequi reiciendis harum nulla aperiam vero in odio repellat!</h6>
+                <form class="d-flex py-3" onsubmit="createTask(event)">
+                    <input type="text" class="form-control w-75" id="taskName">
+                    <button class="btn btn-primary">Add task</button>
+                </form>
+                <div>
+                    <table class="table table-striped table-hover">
+                        <thead class="table-success">
+                            <tr>
+                                <td>#ID</td>
+                                <td>Tast Name</td>
+                                <td>Status</td>
+                                <td>Acctions</td>
+                            </tr>
+                        </thead>
+                        <tbody id="tbTaskList">    
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </section>
+    </div>
+    <script src="assest/js/bootstrap.bundle.min.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
