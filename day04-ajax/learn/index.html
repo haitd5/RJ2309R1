@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="assest/css/bootstrap.min.css">
+    
+</head>
+<body>
+    <div class="container mt-2">
+        <button onclick="showUseList()" class="btn btn-primary">
+            show use list
+        </button>
+        <div class="row" id="userList">
+               
+        </div>
+
+        <!-- popup menu -->
+        <div class="modal" id="user-detail">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <!-- modal header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">User Profile</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <!-- modal body -->
+                    <div class="modal-body">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <img src="" alt="" class="img-fluid rounded-start" id="user-avatar">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title" id="user-name"></h5>
+                                    <p class="card-text" id="user-email"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- modal footer -->
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <script src="fetch.js"></script>
+    <script src="assest/js/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+</body>
+</html>
