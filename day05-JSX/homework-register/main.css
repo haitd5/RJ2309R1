@@ -1,0 +1,78 @@
+html {
+    font-size: 62.5%;
+    font-family: 'poppins',sans-serif;
+}
+* {
+    box-sizing: border-box;
+}
+
+body {
+    width: 100%;
+    min-height: 100vh;
+    background-color: #f2f3f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 100px;
+}
+#root {
+    width: 500px;
+}
+.register {
+    padding: 50px 55px;
+    background-color: #fff;
+    width: 100%;
+    max-width: 600px;
+    border-radius: 20px;
+}
+.register-heading {
+    font-size: 30px;
+    font-weight: bold;
+    color: #373941;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.register-label {
+    font-size: 16px;
+    color: #373941;
+    display: inline-block;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+.register-input {
+    display: block;
+    width: 100%;
+    padding: 25px;
+    border-radius: 14px;
+    outline: none;
+    font-family: 'poppins',sans-serif;
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+.register-submit {
+    padding: 25px;
+    color: white;
+    font-size: 18px;
+    text-align: center;
+    border: 0;
+    outline: none;
+    display: inline-block;
+    width: 100%;
+    border-radius: 20px;
+    background-color: #82c91e;
+    font-family: 'poppins',sans-serif;
+    cursor: pointer;
+    margin-top: 25px;
+    margin-bottom: 15px;
+}
+.register-p {
+    text-align: center;
+    font-size: 16px;
+    color: #999;
+
+}
+.register-link {
+    color: #2979ff;
+    text-decoration: none;
+}
