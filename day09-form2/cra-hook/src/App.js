@@ -1,10 +1,11 @@
 
 import './App.css';
+import CreateStaff from "./components/CreateStaff";
 
 function App() {
   return (
-      <div className="container">
-		  
+      <div className="container py-3">
+		  <CreateStaff/>
       </div>
   );
 }
