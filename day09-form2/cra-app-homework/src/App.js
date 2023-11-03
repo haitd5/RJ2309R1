@@ -1,24 +1,20 @@
-import logo from './logo.svg';
+
 import './App.css';
+import RegistrationForm from "./conponents/RegistrationForm";
+import ContactForm from "./conponents/ContactForm";
+import MailForm from "./conponents/MailForm";
+import BookManagement from "./conponents/BookManagement";
+import MedicalDeclarationForm from "./conponents/MedicalDeclarationForm";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <div className="container">
+          {/*<RegistrationForm/>*/}
+          {/*<ContactForm/>*/}
+          {/*<MailForm/>*/}
+          {/*<BookManagement/>*/}
+          <MedicalDeclarationForm/>
+      </div>
   );
 }
 
