@@ -1,19 +1,25 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 function Navbar() {
     return (
         <>
             <nav className="navbar navbar-expand-lg navbar-dark bg-success">
-                <div className="container-fluid">
-                    <a className="navbar-brand" href="#!">
+                <div className="container">
+                    <NavLink className="navbar-brand" to={`/`}>
                         React Router DOM
-                    </a>
-                    <div className="collaspe nav-collaspe" id="navbarNav">
+                    </NavLink>
+                    <div className="collapse navbar-collapse" id="navbarNav">
                         <ul className="navbar-nav">
                             <li className="nav-item">
-                                <a className="nav-link active" href="#!">
+                                <NavLink className="nav-link" to={`/home`}>
                                     Home
-                                </a>
+                                </NavLink>
+                            </li>
+                            <li className="nav-item">
+                                <NavLink className="nav-link" to={`/student`}>
+                                    Student
+                                </NavLink>
                             </li>
                         </ul>
                     </div>
