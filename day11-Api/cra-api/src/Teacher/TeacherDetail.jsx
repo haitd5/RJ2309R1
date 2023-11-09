@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from "react";
 import {Link, useParams} from "react-router-dom";
 import dayjs from "dayjs";
+import TeacherService from "../service/teacherService";
+
 
 
 function TeacherDetail() {
@@ -11,12 +13,12 @@ function TeacherDetail() {
 	
 	useEffect(() => {
 		setIsLoading(true)
-		fetch(`https://6547833d902874dff3ac6769.mockapi.io/teachers/${teacherId}`)
-			.then((res) => res.json())
-			.then((data) => {
-				setTeacherDetail(data)
-				setIsLoading(false)
-			})
+		async function getTeacher() {
+			let teacherRes = await TeacherService.getTeacher(teacherId)
+			setTeacherDetail(teacherRes.data)
+			setIsLoading(false)
+		}
+		getTeacher();
 	}, [teacherId])
 	return (
 		<>

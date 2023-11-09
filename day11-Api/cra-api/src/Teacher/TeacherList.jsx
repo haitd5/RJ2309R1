@@ -6,6 +6,9 @@ import * as yup from 'yup'
 import { yupResolver } from "@hookform/resolvers/yup"
 import { toast } from 'react-toastify'
 import Swal from "sweetalert2";
+import TeacherService from "../service/teacherService";
+import DepartmentService from "../service/departmentService";
+
 
 const schema = yup.object({
 	name: yup.string().required(),
@@ -24,9 +27,9 @@ function TeacherList() {
 		resolver: yupResolver(schema)
 	})
 	async function fetchData() {
-		let res = await fetch('https://6547833d902874dff3ac6769.mockapi.io/teachers')
-		let data = await res.json();
-		setTeacherList(data)
+		let teacherRes = await TeacherService.getTeachers()
+		console.log(teacherRes.data)
+		setTeacherList(teacherRes.data)
 		setIsLoading(false)
 	}
 	
@@ -38,33 +41,24 @@ function TeacherList() {
 	useEffect(() => {
 		setIsLoading(true)
 		async function fetchDepartment() {
-			let departRes = await fetch('https://6547833d902874dff3ac6769.mockapi.io/department')
-			let data = await departRes.json();
-			setDepartmentList(data)
+			let departRes = await DepartmentService.getDepartments()
+			setDepartmentList(departRes.data)
 			setIsLoading(false)
 		}
 		fetchDepartment();
 	}, [])
 	
-	const handleAddTeacher = (data) => {
+	const handleAddTeacher = async (data) => {
 		data.department = JSON.parse(data.department)
 		setIsLoading(true)
-		async function postTeacher() {
-			const createTeacherRes = await fetch('https://6547833d902874dff3ac6769.mockapi.io/teachers', {
-				method: "POST",
-				headers: {
-					"Content-Type": 'application/json'
-				},
-				body: JSON.stringify(data)
-			})
-			const createTeacherResult = await createTeacherRes.json();
-			if (createTeacherRes) {
-				toast.success(`Teacher ${createTeacherRes.name} added success!`)
-				fetchData()
-				reset()
-			}
+		let createTeacherRes = await TeacherService.createTeacher(data)
+		if (createTeacherRes.data) {
+			toast.success(`Teacher ${createTeacherRes.data.name} added success!`)
+			fetchData()
+			reset()
 		}
-		postTeacher();
+		console.log(createTeacherRes.data)
+		setIsLoading(false)
 	}
 	const handleRemoveTeacher = (teacher) => {
 		Swal.fire({
@@ -76,16 +70,16 @@ function TeacherList() {
 			cancelButtonColor: "#d33",
 			confirmButtonText: "Confirm",
 			cancelButtonText: "No"
-		}).then((result) => {
+		}).then(async (result) => {
 			if (result.isConfirmed) {
-				fetch(`https://6547833d902874dff3ac6769.mockapi.io/teachers/${teacher.id}`, {
-					method: "DELETE"
-				})
-					.then((res) => res.json())
-					.then(result => {
-						toast.success(`Teacher ${result.name} removed success`)
-						setRemoveTeacher(result)
-					})
+				let delTeacherRes = await TeacherService.deteleTeacher(teacher.id)
+				if(delTeacherRes.data){
+					toast.success(`Teacher ${delTeacherRes.name} removed success`)
+					setRemoveTeacher(delTeacherRes.data)
+				}
+				else{
+					toast.error('System error')
+				}
 			}
 		});
 		// let confirm =  window.confirm(`Are you sure remove teacher ${teacher.name}?`)
