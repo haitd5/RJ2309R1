@@ -8,13 +8,15 @@ import { toast } from 'react-toastify'
 import Swal from "sweetalert2";
 import TeacherService from "../service/teacherService";
 import DepartmentService from "../service/departmentService";
+import NoAvatar from '../../src/asset/image/noavatar.png'
+import fileService from "../service/fileService";
 
 
 const schema = yup.object({
 	name: yup.string().required(),
 	email: yup.string().required().email(),
 	dob: yup.date().required().typeError('dob is a required field'),
-	avatar: yup.string().required().url(),
+	// avatar: yup.string().required().url(),
 	gender: yup.string().required()
 })
 function TeacherList() {
@@ -23,6 +25,8 @@ function TeacherList() {
 	const [departmentList, setDepartmentList] = useState([])
 	const [toggleForm, setToggleForm] = useState(false)
 	const [removeTeacher, setRemoveTeacher] = useState({})
+	const [temporaryAvatar, setTemporaryAvatar] = useState()
+	const [fileAvatar, setFileAvatar] = useState({})
 	const { register, handleSubmit, formState: { errors }, reset } = useForm({
 		resolver: yupResolver(schema)
 	})
@@ -50,12 +54,15 @@ function TeacherList() {
 	
 	const handleAddTeacher = async (data) => {
 		data.department = JSON.parse(data.department)
+		data.avatar = temporaryAvatar;
 		setIsLoading(true)
 		let createTeacherRes = await TeacherService.createTeacher(data)
 		if (createTeacherRes.data) {
 			toast.success(`Teacher ${createTeacherRes.data.name} added success!`)
 			fetchData()
 			reset()
+			setTemporaryAvatar()
+			setFileAvatar()
 		}
 		console.log(createTeacherRes.data)
 		setIsLoading(false)
@@ -94,6 +101,20 @@ function TeacherList() {
 		//         })
 		// }
 	}
+	
+	const handleSelectAvatar = (e) =>{
+		// console.log(e.target.files[0])
+		const temporaryAvatar = URL.createObjectURL(e.target.files[0])
+		setTemporaryAvatar(temporaryAvatar)
+		setFileAvatar(e.target.files[0])
+	}
+	
+	const handleUploadAvatar = async () => {
+		let uploadRes = await fileService.upload(fileAvatar)
+		setTemporaryAvatar(uploadRes.data.secure_url)
+		toast.success('avatar upload success')
+	}
+	
 	return (
 		<>
 			<div>
@@ -109,7 +130,7 @@ function TeacherList() {
 					{toggleForm && (
 						<form onSubmit={handleSubmit(handleAddTeacher)}>
 							<div className="row">
-								<div className="col-md-6">
+								<div className="col-md-4">
 									<div className="form-group mb-3">
 										<label className="form-label">Fullname <span className="text-danger">(*)</span></label>
 										<input type="text" className="form-control" placeholder="Fullname"
@@ -136,14 +157,14 @@ function TeacherList() {
 										<button type="button" className="btn btn-sm btn-dark me-3" onClick={() => reset()}>Cancel</button>
 									</div>
 								</div>
-								<div className="col-md-6">
-									<div className="form-group mb-3">
-										<label className="form-label">Avatar <span className="text-danger">(*)</span></label>
-										<input type="url" className="form-control" placeholder="Avatar URL"
-											   {...register('avatar')}
-										/>
-										<span className="text-danger">{errors.avatar?.message}</span>
-									</div>
+								<div className="col-md-4">
+									{/*<div className="form-group mb-3">*/}
+									{/*	<label className="form-label">Avatar <span className="text-danger">(*)</span></label>*/}
+									{/*	<input type="url" className="form-control" placeholder="Avatar URL"*/}
+									{/*		   {...register('avatar')}*/}
+									{/*	/>*/}
+									{/*	<span className="text-danger">{errors.avatar?.message}</span>*/}
+									{/*</div>*/}
 									<div className="form-group mb-3">
 										<label className="form-label">Gender</label>
 										<div className="mt-2">
@@ -167,6 +188,24 @@ function TeacherList() {
 												))
 											}
 										</select>
+									</div>
+								</div>
+								<div className={`col-md-4`}>
+									<div className={`form-group d-flex flex-column align-items-center`}>
+										<img src={temporaryAvatar || NoAvatar} alt={''}
+											 className={'avatar-md'}
+											 onClick={() => document.getElementById('fileAvatar').click()}
+										/>
+										<input type={`file`}
+											   className={`my-2 d-none`} id={'fileAvatar'}
+											   accept={`image/*`}
+											   onChange={handleSelectAvatar}
+										/>
+										<button
+											className={`btn btn-sm btn-warning mt-1`}
+											type={'button'}
+											onClick={handleUploadAvatar}
+										>Upload</button>
 									</div>
 								</div>
 							</div>

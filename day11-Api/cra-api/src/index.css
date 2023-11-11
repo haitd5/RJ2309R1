@@ -8,3 +8,7 @@ body {
   width: 60px;
   height: 60px;
 }
+.avatar-md {
+  width: 200px;
+  cursor: pointer;
+}
