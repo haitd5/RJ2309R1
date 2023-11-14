@@ -10,6 +10,7 @@ import TeacherService from "../service/teacherService";
 import DepartmentService from "../service/departmentService";
 import NoAvatar from '../../src/asset/image/noavatar.png'
 import fileService from "../service/fileService";
+import Spinner from "../components/Spinner";
 
 
 const schema = yup.object({
@@ -27,6 +28,7 @@ function TeacherList() {
 	const [removeTeacher, setRemoveTeacher] = useState({})
 	const [temporaryAvatar, setTemporaryAvatar] = useState()
 	const [fileAvatar, setFileAvatar] = useState({})
+	const [isUploading, setIsUploading] = useState(false)
 	const { register, handleSubmit, formState: { errors }, reset } = useForm({
 		resolver: yupResolver(schema)
 	})
@@ -110,9 +112,11 @@ function TeacherList() {
 	}
 	
 	const handleUploadAvatar = async () => {
+		setIsUploading(true)
 		let uploadRes = await fileService.upload(fileAvatar)
 		setTemporaryAvatar(uploadRes.data.secure_url)
 		toast.success('avatar upload success')
+		setIsUploading(false)
 	}
 	
 	return (
@@ -201,11 +205,21 @@ function TeacherList() {
 											   accept={`image/*`}
 											   onChange={handleSelectAvatar}
 										/>
-										<button
-											className={`btn btn-sm btn-warning mt-1`}
-											type={'button'}
-											onClick={handleUploadAvatar}
-										>Upload</button>
+										{
+											isUploading ? (
+												<button className="btn btn-sm btn-warning mt-1" type="button" disabled>
+												<span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+												Uploading...
+											</button>
+											) : (
+												<button
+													className={`btn btn-sm btn-warning mt-1`}
+													type={'button'}
+													onClick={handleUploadAvatar}
+												>Upload</button>
+											)
+										}
+										
 									</div>
 								</div>
 							</div>
@@ -215,7 +229,7 @@ function TeacherList() {
 			</section>
 			<section>
 				{
-					isLoading ? <p>Loading...</p> : (
+					isLoading ? <Spinner/> : (
 						<table className="table">
 							<thead>
 							<tr>

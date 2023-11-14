@@ -7,13 +7,15 @@ import { toast } from 'react-toastify'
 import dayjs from "dayjs";
 import DepartmentService from "../service/departmentService";
 import TeacherService from "../service/teacherService";
+import Spinner from "../components/Spinner";
+import fileService from "../service/fileService";
 
 
 const schema = yup.object({
 	name: yup.string().required(),
 	email: yup.string().required().email(),
 	dob: yup.date().required().typeError('dob is a required field'),
-	avatar: yup.string().required().url()
+	// avatar: yup.string().required().url()
 })
 
 function ModifyTeacher() {
@@ -22,6 +24,9 @@ function ModifyTeacher() {
 	const [departmentList, setDepartmentList] = useState([])
 	const { teacherId } = useParams()
 	const navigate = useNavigate()
+	const [newFileAvatar, setNewFileAvatar] = useState({})
+	const [isUploading, setIsUploading] = useState(false)
+	const [temporaryAvatar, setTemporaryAvatar] = useState()
 	const { register, handleSubmit, formState: { errors }, reset, setValue } = useForm({
 		resolver: yupResolver(schema)
 	})
@@ -63,6 +68,27 @@ function ModifyTeacher() {
 			navigate("/teacher")
 		}
 	}
+	const handleChangeAvatar = (e) => {
+		const temporaryAvatar = URL.createObjectURL(e.target.files[0])
+		setTemporaryAvatar(temporaryAvatar)
+		setNewFileAvatar(e.target.files[0])
+	}
+	const handleUpdateAvatar = async () => {
+		if(newFileAvatar?.name){
+			setIsUploading(true)
+			let uploadRes = await fileService.upload(newFileAvatar)
+			if(uploadRes?.data?.secure_url){
+				let editTeacherRes = await TeacherService.modifyTeacher({
+					avatar: uploadRes.data.secure_url
+				}, teacherId)
+				setTemporaryAvatar(uploadRes.data.secure_url)
+				toast.success('avatar changed success')
+			}
+			setIsUploading(false)
+		}else {
+			toast.info('You have to provider new image')
+		}
+	}
 	return (
 		<>
 			<div>
@@ -71,7 +97,7 @@ function ModifyTeacher() {
 			</div>
 			<div>
 				{
-					isLoading ? <p>Loading...</p> : (
+					isLoading ? <Spinner/> : (
 						<form onSubmit={handleSubmit(handleUpdateTeacher)}>
 							<div className="row">
 								<div className="col-md-4">
@@ -102,13 +128,13 @@ function ModifyTeacher() {
 									</div>
 								</div>
 								<div className="col-md-4">
-									<div className="form-group mb-3">
-										<label className="form-label">Avatar <span className="text-danger">(*)</span></label>
-										<input type="url" className="form-control" placeholder="Avatar URL"
-											   {...register('avatar')}
-										/>
-										<span className="text-danger">{errors.avatar?.message}</span>
-									</div>
+									{/*<div className="form-group mb-3">*/}
+									{/*	<label className="form-label">Avatar <span className="text-danger">(*)</span></label>*/}
+									{/*	<input type="url" className="form-control" placeholder="Avatar URL"*/}
+									{/*		   {...register('avatar')}*/}
+									{/*	/>*/}
+									{/*	<span className="text-danger">{errors.avatar?.message}</span>*/}
+									{/*</div>*/}
 									<div className="form-group mb-3">
 										<label className="form-label">Gender</label>
 										<div className="mt-2">
@@ -157,8 +183,27 @@ function ModifyTeacher() {
 										</select>
 									</div>
 								</div>
-								<div className="col-md-4 d-flex align-items-center">
-									<img className="w-50" src={teacherDetail.avatar} alt="" />
+								<div className="col-md-4 d-flex align-items-center flex-column">
+									<img className="avatar-md" src={temporaryAvatar || teacherDetail.avatar} alt=""
+										 onClick={() => document.getElementById('file-avatar').click()}/>
+									<input type={`file`} accept={`image/*`}
+										   className={`d-none`} id={`file-avatar`}
+										   onChange={handleChangeAvatar}
+									/>
+									{
+										isUploading ? (
+											<button className="btn btn-sm btn-primary mt-1" type="button" disabled>
+												<span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+												Changing Avatar...
+											</button>
+										) : (
+											<button type={`button`}
+													className={`btn btn-sm btn-primary mt-1`}
+													onClick={handleUpdateAvatar}
+											>Change Avatar</button>
+										)
+									}
+									
 								</div>
 							</div>
 						</form>

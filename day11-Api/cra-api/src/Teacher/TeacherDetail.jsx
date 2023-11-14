@@ -2,6 +2,7 @@ import React, {useState, useEffect} from "react";
 import {Link, useParams} from "react-router-dom";
 import dayjs from "dayjs";
 import TeacherService from "../service/teacherService";
+import Spinner from "../components/Spinner";
 
 
 
@@ -27,10 +28,10 @@ function TeacherDetail() {
 				<Link to={`/teacher`}>Back to list</Link>
 			</div>
 			{
-				isLoading ? (<p>Loading.....</p>) : (
+				isLoading ? (<Spinner/>) : (
 					<div className={`row d-flex align-items-center justify-content-center`}>
 						<div className={`col-md-2`}>
-							<img src={teacherDetail.avatar} alt={''}/>
+							<img className={`avatar-md`} src={teacherDetail.avatar} alt={''}/>
 						</div>
 						<div className={`col-md-10`}>
 							<div>FullName: {teacherDetail.name}</div>
