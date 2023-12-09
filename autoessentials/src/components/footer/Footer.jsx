@@ -1,5 +1,6 @@
 import React from "react";
 
+
 function Footer() {
 	return (
 		<>
@@ -8,7 +9,7 @@ function Footer() {
 					<div className="container">
 						<div className="row">
 							<div className="col-12 col-md-6 col-lg-3 text-center text-md-start pb-2">
-								<img src="../../assest/image/footter2.png" alt="" className="img-fluid w-75 border bg-color"/>
+								<img src="https://res.cloudinary.com/deiyf3lf7/image/upload/v1701479936/footerimage.png" alt="" className={`img-fluid w-75 bg-color border`}/>
 							</div>
 							<div className="col-12 col-md-6 col-lg-3 text-center text-md-start pb-2">
 								<h5 className="fw-bold pb-2">Links</h5>

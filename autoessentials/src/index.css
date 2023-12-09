@@ -60,10 +60,9 @@ body {
 .cart-color {
   background-color: #FFF9E5;
 }
-img {
-  transition: all 0.3s ease;
+.cart-banner {
+  background: url(assest/image/cart-banner.png);
 }
-img:hover {
-  transform: scale(0.9);
-
+.shop-banner {
+  background: url(assest/image/shop.png);
 }
