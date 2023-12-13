@@ -1,13 +1,14 @@
 import React from "react";
 import {useSelector} from "react-redux";
-import {cartSelector} from "../../redux-toolkit/selectors";
+import {cartSelector, likeItemSelector} from "../../redux-toolkit/selectors";
 import {Link} from "react-router-dom";
 
 function Header() {
 	const cart = useSelector(cartSelector)
+	const likeItem = useSelector(likeItemSelector)
 	return (
 		<>
-			<div className="p-0 pb-5 my-2 ">
+			<div className="p-0 pb-5">
 				<nav className="navbar navbar-expand-lg navbar-light bg-white fixed-top shadow-sm">
 					<div className="container">
 						<Link to={`/home`} className="navbar-brand d-flex justify-content-between align-items-center order-lg-0">
@@ -19,7 +20,10 @@ function Header() {
 								cart.cartDetails.length ? (
 									<Link to={`/cart`} className="btn position-relative">
 										<i className="fa fa-shopping-cart"></i>
-										<span className="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
+										<span className="bg-danger border border-light rounded-circle text-white"
+											  style={{position: "absolute", top: "-10px",right: "-2px", padding: "0px" +
+													  " 5px", fontSize: "12px"}}
+										>
     										{cart.cartDetails.length}
 										</span>
 									</Link>
@@ -29,21 +33,33 @@ function Header() {
 									</Link>
 								)
 							}
-							{/*<button type="button" className="btn position-relative">*/}
-							{/*	<i className="fa fa-shopping-cart"></i>*/}
-							{/*	<span className="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">*/}
-    						{/*		{cart.cartDetails.length}*/}
-  							{/*	</span>*/}
-							{/*</button>*/}
-							<button type="button" className="btn">
-								<i className="fa-solid fa-heart"></i>
-							</button>
 							
-							<a href="" className="text-decoration-none">
+							{
+								likeItem.cartDetails.length ? (
+									<Link to={`/like`} className="btn position-relative">
+										<i className="fa-solid fa-heart"></i>
+										<span className="bg-danger border border-light rounded-circle text-white"
+											  style={{position: "absolute", top: "-10px",right: "-2px", padding: "0px" +
+													  " 5px", fontSize: "12px"}}
+										>
+    										{likeItem.cartDetails.length}
+										</span>
+									</Link>
+								) : (
+									<Link to={`/like`} className="btn">
+										<i className="fa-solid fa-heart"></i>
+									</Link>
+								)
+							}
+							{/*<button type="button" className="btn">*/}
+							{/*	<i className="fa-solid fa-heart"></i>*/}
+							{/*</button>*/}
+							
+							<Link to={`/dashboard`} className="text-decoration-none">
 								<button type="button" className="btn">
 									<i className="fas fa-user"></i>
 								</button>
-							</a>
+							</Link>
 						</div>
 						<button className="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
 								data-bs-target="#navMenu">

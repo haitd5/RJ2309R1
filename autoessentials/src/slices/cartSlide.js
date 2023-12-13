@@ -1,4 +1,4 @@
-import {createSlice} from "@reduxjs/toolkit";
+import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 
 const cartSlide = createSlice({
 	name: 'cart',
@@ -11,13 +11,7 @@ const cartSlide = createSlice({
 		},
 		cartDetails: [
 		
-		],
-		customerInfo: {
-			fullName: '',
-			address: '',
-			email: '',
-			mobile: ''
-		}
+		]
 	},
 	reducers: {
 		addToCart: (state, action) =>{
@@ -72,7 +66,58 @@ const cartSlide = createSlice({
 			}
 			state.cartInfo.subTotal = newSubTotal
 			state.cartInfo.total = newSubTotal + state.cartInfo.shipping
+		},
+		addToCartWithQuantity: (state, action) => {
+			const { id, quantity } = action.payload;
+			
+			let cartItem = state.cartDetails.find((cartItem) => cartItem.id === id);
+			
+			if (cartItem?.id) {
+				cartItem.quantity = Number(cartItem.quantity) + quantity;
+				cartItem.amount = Number(cartItem.quantity) * cartItem.newPrice;
+			} else {
+				state.cartDetails.push({
+					...action.payload,
+					quantity: quantity,
+					amount: action?.payload?.newPrice * quantity,
+				});
+			}
+			
+			let newSubTotal = 0;
+			for (const item of state.cartDetails) {
+				newSubTotal += Number(item.amount);
+			}
+			
+			state.cartInfo.subTotal = newSubTotal;
+			state.cartInfo.total = newSubTotal + state.cartInfo.shipping;
 		}
+	},
+	extraReducers: (builder) => {
+		builder
+			.addCase(checkoutThunkAction.pending, (state, action) => {
+				state.status = 'loading'
+			})
+			.addCase(checkoutThunkAction.fulfilled, (state,action) => {
+				state.cartDetails = []
+				state.cartInfo = {
+					subTotal: 0,
+					shipping: 0,
+					total: 0,
+					status: 'pending'
+				}
+			})
 	}
 })
+export const checkoutThunkAction = createAsyncThunk('cart/checkoutThunkAction', async (data) => {
+	let orderRes = await fetch('https://jsonserver-api-resfull-api.vercel.app/orderList', {
+		method: "POST",
+		headers: {
+			'Content-Type' : 'application/json'
+		},
+		body: JSON.stringify(data)
+	})
+	let result = await orderRes.json()
+	return result;
+})
+
 export default cartSlide;

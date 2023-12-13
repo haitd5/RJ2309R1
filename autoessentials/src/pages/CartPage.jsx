@@ -45,7 +45,7 @@ function CartPage() {
 				<div className="container">
 					<div className="row">
 						<div className="col-sm-12 col-lg-8 g-3">
-							<div className="row py-3 cart-color">
+							<div className="row py-3 cart-color mb-3">
 								<div className="col-2"></div>
 								<div className="col-3 justify-content-center my-auto text-center">
 									<p className="m-0">Product</p>
@@ -63,9 +63,11 @@ function CartPage() {
 							</div>
 							{
 								cartDetails?.map((cartItem) => (
-									<div className="row border-bottom" key={cartItem.id}>
+									<div className="row border-bottom pb-2" key={cartItem.id}>
 										<div className="col-2 justify-content-center my-auto text-center">
-											<img src={cartItem.img} alt="" className="img-fluid"/>
+											<img src={cartItem.img} alt=""
+												 className="img-fluid"
+												 style={{width: "120px", height: "120px"}}/>
 										</div>
 										<div className="col-3 justify-content-center my-auto text-center">
 											<p className="m-0">{cartItem.title}</p>
@@ -152,9 +154,9 @@ function CartPage() {
 									</div>
 								</div>
 								<div className="pb-3 text-center">
-									<a href="checkout.html" className="text-decoration-none text-white">
+									<Link to={`/checkout`} className="text-decoration-none text-white">
 										<button className="btn btn-secondary">Check Out</button>
-									</a>
+									</Link>
 								</div>
 							</div>
 						</div>

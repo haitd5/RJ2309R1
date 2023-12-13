@@ -11,6 +11,10 @@ body {
   font-size: .75rem;
 }
 .card img {
+  width: 200px;
+  height: 200px;
+}
+.card img {
   transition: all 0.3s ease;
 }
 .card:hover img {
@@ -65,4 +69,24 @@ body {
 }
 .shop-banner {
   background: url(assest/image/shop.png);
+}
+.checkout-banner {
+  background: url(assest/image/checkout-banner.png);
+}
+.like-banner {
+  background: url(assest/image/contact.png);
+}
+.nav-pills li:hover {
+  color: #FFC42A;
+  background-color: #FFC42A;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.active {
+  background-color: #9F9F9F;
+  border-radius: 5px;
+}
+.avatar {
+  width: 40px;
+  border-radius: 20px;
 }

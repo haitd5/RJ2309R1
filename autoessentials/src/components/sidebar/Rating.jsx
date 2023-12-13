@@ -4,7 +4,7 @@ import filtersSlide from "../../slices/filtersSlide";
 import {ratingSelector} from "../../redux-toolkit/selectors";
 
 const ratings = [
-	"All", "1", "2", "3", "4", '5'
+	"All", "1", "2", "3", "4", "5"
 ]
 function Rating() {
 	const currenRating = useSelector(ratingSelector)
@@ -29,7 +29,7 @@ function Rating() {
 								{
 									rating === "All" ? "All" : (
 										new Array(Number(6 - rating)).fill(1)).map((value, index) => (
-											<i className="fa-solid fa-star" key={index}></i>
+										<i key={index} className="fa-solid fa-star" style={{color: "#F4CE14"}}></i>
 										)
 									)
 								}

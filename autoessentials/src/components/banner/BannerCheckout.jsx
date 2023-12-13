@@ -12,4 +12,4 @@ function BannerCheckout() {
 		</>
 	)
 }
-export default BannerCheckout()
+export default BannerCheckout;
