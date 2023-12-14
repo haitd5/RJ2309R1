@@ -4,17 +4,18 @@ import {useDispatch, useSelector} from "react-redux";
 import product from "./Product";
 import rating from "../sidebar/Rating";
 import {loadingSelector, remainProducts} from "../../redux-toolkit/selectors";
-import productsSlide, {fetchProductThunkAction} from "../../slices/productsSlide";
+import productsSlide, {fetchProductListPaginateThunkAction, fetchProductThunkAction} from "../../slices/productsSlide";
 import {Link} from "react-router-dom";
 
 function Products() {
 	const dispatch = useDispatch()
 	const loading = useSelector(loadingSelector)
+	
 	useEffect(() => {
 		dispatch(fetchProductThunkAction())
-	}, [dispatch]);
+		
+	}, []);
 	const remainProductList = useSelector(remainProducts)
-	
 	return (
 		<section id="menu" className="menu py-4 mt-4">
 			<div className="container">

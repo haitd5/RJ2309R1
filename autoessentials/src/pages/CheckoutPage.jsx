@@ -12,6 +12,8 @@ import {v4 as uuid} from "uuid";
 import cartSlide, {checkoutThunkAction} from "../slices/cartSlide";
 import {toast} from "react-toastify";
 import Swal from "sweetalert2";
+import {useNavigate} from "react-router-dom";
+
 
 const schema = yup
 	.object({
@@ -25,6 +27,7 @@ function CheckoutPage() {
 	const dispatch = useDispatch()
 	const cart = useSelector(cartSelector)
 	const {cartInfo, cartDetails} = cart
+	const navigate = useNavigate()
 	const [selectedOption, setSelectedOption] = useState('COD')
 	const handleOptionChange = (e) => {
 		setSelectedOption(e.target.value)
@@ -59,6 +62,7 @@ function CheckoutPage() {
 				}
 				dispatch(checkoutThunkAction(order))
 				reset()
+				navigate("/shop")
 				toast.success(`checkout success`, {autoClose : 1000, position: "bottom-right"})
 			}
 		})
@@ -193,8 +197,7 @@ function CheckoutPage() {
 										</div>
 									</div>
 									<div className="text-center py-3">
-										<button className="btn btn-primary py-3 px-5 text-white"
-										>Place order</button>
+										<button className="btn btn-primary py-3 px-5 text-white" type={'submit'}>Place order</button>
 									</div>
 							</div>
 						</div>

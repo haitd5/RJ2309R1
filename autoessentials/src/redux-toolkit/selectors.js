@@ -11,6 +11,8 @@ export const likeItemSelector = (state) => state.likeItem
 export const productSelector = (state) => state.productList.product
 export const orderListSelector = (state) => state.orders.orderList
 export const orderLoadingSelector = (state) => state.orders.status
+export const productPaginationSelector = (state) => state.manageProduct.data
+export const loadingManageSelector = (state) => state.manageProduct.status
 
 export const remainProducts = createSelector(
 	productListSelector,
@@ -24,7 +26,7 @@ export const remainProducts = createSelector(
 				filtersProduct = filtersProduct.filter((p) => p.title.toLowerCase().includes(searchText.toLowerCase()))
 			}
 			if(category !=="All"){
-				filtersProduct = filtersProduct.filter((p) => p.shop.toLowerCase() === category.toLowerCase())
+				filtersProduct = filtersProduct.filter((p) => p.category.toLowerCase() === category.toLowerCase())
 			}
 			if(ratings !== "All") {
 				filtersProduct = filtersProduct.filter((p) => p.star >= Number(ratings))

@@ -8,13 +8,11 @@ import { CgTranscript } from "react-icons/cg";
 import { CiSettings } from "react-icons/ci";
 import { FaGauge } from "react-icons/fa6";
 import { MdOutlineLogout } from "react-icons/md";
-import NavbarDashboard from "./NavbarDashboard";
 
 
 function SidebarDashboard() {
 	return (
 		<>
-			
 			<div className={`d-flex justify-content-between flex-column p-3 vh-100`}>
 				<div className={``}>
 					<Link to={`/dashboard`} className={'text-decoration-none'}>
@@ -37,16 +35,6 @@ function SidebarDashboard() {
 								</span>
 							</li>
 						</NavLink>
-						<NavLink to={`/dashboard/customers`} className={'text-decoration-none my-2'}>
-							<li className={`nav-item`}>
-								<span className={`nav-link`}>
-									<span className={`mx-3 text-dark`}>
-										<FiUsers size={20}/>
-									</span>
-									<span className={`fs-6 d-none d-sm-inline text-dark`}>Customers</span>
-								</span>
-							</li>
-						</NavLink>
 						<NavLink to={`/dashboard/orders`} className={'text-decoration-none my-2'}>
 							<li className={`nav-item`}>
 								<span className={`nav-link`}>
@@ -54,6 +42,16 @@ function SidebarDashboard() {
 										<IoCartOutline size={20}/>
 									</span>
 									<span className={`fs-6 d-none d-sm-inline text-dark`}>Orders</span>
+								</span>
+							</li>
+						</NavLink>
+						<NavLink to={`/dashboard/customers`} className={'text-decoration-none my-2'}>
+							<li className={`nav-item`}>
+								<span className={`nav-link`}>
+									<span className={`mx-3 text-dark`}>
+										<FiUsers size={20}/>
+									</span>
+									<span className={`fs-6 d-none d-sm-inline text-dark`}>Customers</span>
 								</span>
 							</li>
 						</NavLink>
@@ -180,7 +178,7 @@ function SidebarDashboard() {
 					{/*</ul>*/}
 				</div>
 			</div>
-			
+		
 		</>
 	)
 }

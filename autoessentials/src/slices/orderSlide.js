@@ -20,8 +20,10 @@ const orderSlide = createSlice({
 			})
 	}
 })
-export const fetchOrderListThunkAction = createAsyncThunk('cart/fetchOrderListThunkAction', async () => {
-	let orderListRes = await fetch('https://jsonserver-api-resfull-api.vercel.app/orderList')
+export const fetchOrderListThunkAction = createAsyncThunk(
+	'cart/fetchOrderListThunkAction',
+	async () => {
+	let orderListRes = await fetch('https://jsonserver-api-nmel.vercel.app/orderList')
 	let data = await orderListRes.json()
 	return data
 })

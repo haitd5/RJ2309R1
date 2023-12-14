@@ -109,7 +109,7 @@ const cartSlide = createSlice({
 	}
 })
 export const checkoutThunkAction = createAsyncThunk('cart/checkoutThunkAction', async (data) => {
-	let orderRes = await fetch('https://jsonserver-api-resfull-api.vercel.app/orderList', {
+	let orderRes = await fetch('https://jsonserver-api-nmel.vercel.app/orderList', {
 		method: "POST",
 		headers: {
 			'Content-Type' : 'application/json'

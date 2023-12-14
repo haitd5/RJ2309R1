@@ -1,8 +1,7 @@
 import React from "react";
-import SidebarDashboard from "../../components/dashboard/SidebarDashboard";
-import NavbarDashboard from "../../components/dashboard/NavbarDashboard";
-import OrderList from "../../components/dashboard/OrderList";
-import ProductListManage from "../../components/dashboard/ProductListManage";
+import SidebarDashboard from "../../components/dashboard/sidebar/SidebarDashboard";
+import NavbarDashboard from "../../components/dashboard/nabar/NavbarDashboard";
+import ProductListManagement from "../../components/dashboard/productMangement/ProductListManagement";
 
 function ProductManagementPage() {
 	return (
@@ -13,7 +12,7 @@ function ProductManagementPage() {
 				</div>
 				<div className={`col`} style={{background: "#F3F3F3"}}>
 					<NavbarDashboard/>
-					<ProductListManage/>
+					<ProductListManagement/>
 				</div>
 			</div>
 		</>

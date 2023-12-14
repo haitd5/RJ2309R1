@@ -77,7 +77,7 @@ function Header() {
 									<a className="nav-link text-uppercase link-custom text-dark" href="">About</a>
 								</li>
 								<li className="nav-item px-2 py-2">
-									<a className="nav-link text-uppercase link-custom text-dark" href="">Contact</a>
+									<Link to={`/contact`} className="nav-link text-uppercase link-custom text-dark" href="">Contact</Link>
 								</li>
 								<li className="nav-item px-2 py-2">
 									<a className="nav-link text-uppercase link-custom text-dark" href="">Tools</a>

@@ -28,43 +28,53 @@ const productsSlide = createSlice({
 				state.status = 'idle'
 				state.product = action.payload
 			})
-			.addCase(addNewProductThunkAction.pending, (state, action) => {
+			.addCase(fetchProductListPaginateThunkAction.pending, (state, action) => {
 				state.status = 'loading'
 			})
-			.addCase(addNewProductThunkAction.fulfilled, (state, action) => {
-				state.products.unshift(action.payload)
+			.addCase(fetchProductListPaginateThunkAction.fulfilled, (state, action) => {
+				state.status = 'idle'
+				state.data = action.payload
 			})
+			
 	}
 })
 export const fetchProductThunkAction = createAsyncThunk('productList/fetchProductThunkAction',async () => {
-	let productListRes = await fetch('https://jsonserver-api-resfull-api.vercel.app/productList')
+	let productListRes = await fetch('https://jsonserver-api-nmel.vercel.app/productList')
 	let data = await productListRes.json()
+	data = data.sort(function (item_1, item_2) {
+		return Number(item_2.id) - Number(item_1.id)
+	})
 	return data;
 })
 export const fetchProductByIdThunkAction = createAsyncThunk(
 	'productList/fetchProductByIdThunkAction',
 	async (productId) => {
-		let productRes = await fetch(`https://jsonserver-api-resfull-api.vercel.app/productList/${productId}`)
+		let productRes = await fetch(`https://jsonserver-api-nmel.vercel.app/productList/${productId}`)
 		let product = await productRes.json()
-		product = product.soft(function (item_1, item_2) {
-			return Number(item_2.id) - Number(item_1.id)
-		})
 		return product
 	}
 )
-export const addNewProductThunkAction = createAsyncThunk(
-	'productList/addNewProductThunkAction',
-	async (newProduct) => {
-		let newProductRes = await fetch('https://jsonserver-api-resfull-api.vercel.app/productList', {
-			method: 'POST',
-			headers: {
-				'Content-Type' : 'application/json'
-			},
-			body: JSON.stringify(newProduct)
-		})
-		let data = await newProductRes.json()
+export const fetchProductListPaginateThunkAction = createAsyncThunk(
+	'productList/fetchProductListPaginateThunkAction',
+	async (paginate) => {
+		const {_page, _limit, _sort, _order} = paginate
+		let productListRes = await fetch('https://jsonserver-api-nmel.vercel.app/productList')
+		let productList = await productListRes.json()
+		let pagination = {
+			totalPage: Math.ceil(Number(productList.length) / Number(_limit)),
+			currentPage: _page,
+			pageSize: _limit
+		}
+		let productPaginationRes = await fetch(`https://jsonserver-api-nmel.vercel.app/productList?_page=${_page}&_limit=${_limit}&_sort=${_sort}&_order=${_order}`)
+		let products = await productPaginationRes.json()
+		let data = {
+			products: products,
+			pagination: pagination
+		}
+		
 		return data
 	}
 )
+
 
 export default productsSlide;

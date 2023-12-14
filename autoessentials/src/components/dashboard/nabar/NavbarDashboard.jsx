@@ -21,12 +21,12 @@ function NavbarDashboard() {
 						<div className="collapse navbar-collapse order-lg-1 mx-3" id="navMenu">
 							<form className="d-flex">
 								<input className="form-control me-2" type="search" placeholder="Search"/>
-									<button className="btn btn-outline-success" type="submit">Search</button>
+								<button className="btn btn-outline-success" type="submit">Search</button>
 							</form>
 						</div>
 					</div>
 				</nav>
-				
+			
 			</div>
 		</>
 	)

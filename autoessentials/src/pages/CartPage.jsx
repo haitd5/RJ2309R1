@@ -73,7 +73,7 @@ function CartPage() {
 											<p className="m-0">{cartItem.title}</p>
 										</div>
 										<div className="col-2 justify-content-center my-auto text-center">
-											<p className="m-0">{cartItem.newPrice}</p>
+											<p className="m-0">$ {cartItem.newPrice}</p>
 										</div>
 										<div className="col-2 justify-content-center my-auto text-center">
 											<div className="d-flex">
@@ -98,7 +98,7 @@ function CartPage() {
 											</div>
 										</div>
 										<div className="col-2 justify-content-center my-auto text-center">
-											<p className="m-0">{cartItem.amount}</p>
+											<p className="m-0">$ {cartItem.amount}</p>
 										</div>
 										<div className="col-1 justify-content-center my-auto text-center">
 												<i className="fas fa-trash-alt"
@@ -108,7 +108,7 @@ function CartPage() {
 									</div>
 								))
 							}
-							<div className={`row`}>
+							<div className={`row my-3`}>
 								<Link to={`/shop`} className={`text-decoration-none`}>
 									<i className="fa-solid fa-left-long me-1"></i>
 									Continue shopping
@@ -133,7 +133,7 @@ function CartPage() {
 									</div>
 									<div className="col-7 my-auto">
 										<p className="m-0">
-											{cartInfo.subTotal}
+											$ {cartInfo.subTotal}
 										</p>
 									</div>
 								</div>
@@ -150,7 +150,7 @@ function CartPage() {
 										<p className="m-0 fw-bold">Total: </p>
 									</div>
 									<div className="col-7 my-auto">
-										<p className="m-0">{cartInfo.total}</p>
+										<p className="m-0">$ {cartInfo.total}</p>
 									</div>
 								</div>
 								<div className="pb-3 text-center">

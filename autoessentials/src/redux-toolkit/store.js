@@ -4,6 +4,7 @@ import filtersSlide from "../slices/filtersSlide";
 import cartSlide from "../slices/cartSlide";
 import likeItemSlide from "../slices/likeItemSlide";
 import orderSlide from "../slices/orderSlide";
+import manageProductSlide from "../slices/manageProductSlide";
 
 const store = configureStore({
 	reducer: {
@@ -11,7 +12,8 @@ const store = configureStore({
 		filters: filtersSlide.reducer,
 		cart: cartSlide.reducer,
 		likeItem: likeItemSlide.reducer,
-		orders: orderSlide.reducer
+		orders: orderSlide.reducer,
+		manageProduct: manageProductSlide.reducer
 	}
 })
 export default store

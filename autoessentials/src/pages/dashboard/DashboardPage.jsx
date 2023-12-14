@@ -1,18 +1,16 @@
 import React from "react";
-import SidebarDashboard from "../../components/dashboard/SidebarDashboard";
-import NavbarDashboard from "../../components/dashboard/NavbarDashboard";
+import OrderList from "../../components/dashboard/oderList/OderList";
+import DashboardLayout from "../../layouts/DashboardLayout";
+import MainDashboard from "../../components/dashboard/mainDashboard/MainDashboard";
+
+
 
 function DashboardPage() {
 	return (
 		<>
-			<div className={`d-flex`}>
-				<div className={`w-auto`}>
-					<SidebarDashboard/>
-				</div>
-				<div className={`col`} style={{background: "#F3F3F3"}}>
-					<NavbarDashboard/>
-				</div>
-			</div>
+			<DashboardLayout>
+				<MainDashboard/>
+			</DashboardLayout>
 		</>
 	)
 }

@@ -1,6 +1,7 @@
 import React from "react";
-import SidebarDashboard from "../components/dashboard/SidebarDashboard";
-import NavbarDashboard from "../components/dashboard/NavbarDashboard";
+import SidebarDashboard from "../components/dashboard/sidebar/SidebarDashboard";
+import NavbarDashboard from "../components/dashboard/nabar/NavbarDashboard";
+
 
 
 function DashboardLayout({children}) {

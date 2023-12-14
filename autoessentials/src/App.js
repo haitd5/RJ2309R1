@@ -10,6 +10,8 @@ import ItemDetailPage from "./pages/ItemDetailPage";
 import DashboardPage from "./pages/dashboard/DashboardPage";
 import OrderManagementPage from "./pages/dashboard/OrderManagementPage";
 import ProductManagementPage from "./pages/dashboard/ProductManagementPage";
+import ContactPage from "./pages/ContactPage";
+import CustomersPage from "./pages/dashboard/CustomersPage";
 
 function App() {
   return (
@@ -23,6 +25,7 @@ function App() {
             <Route path={`/`} element={<HomePage/>}/>
             <Route path={`/home`} element={<HomePage/>}/>
             <Route path={`/shop`} element={<ShopPage/>}/>
+            <Route path={`/contact`} element={<ContactPage/>}/>
             <Route path={`/cart`} element={<CartPage/>}/>
             <Route path={`/checkout`} element={<CheckoutPage/>}/>
             <Route path={`/like`} element={<LikeItemCartPage/>}/>
@@ -30,6 +33,7 @@ function App() {
             <Route path={`/dashboard`} element={<DashboardPage/>}/>
             <Route path={`dashboard/orders`} element={<OrderManagementPage/>}/>
             <Route path={`/dashboard/products`} element={<ProductManagementPage/>}/>
+            <Route path={`dashboard/customers`} element={<CustomersPage/>}/>
         </Routes>
       </>
   );

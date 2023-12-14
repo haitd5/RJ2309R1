@@ -90,3 +90,23 @@ body {
   width: 40px;
   border-radius: 20px;
 }
+.modal {
+  background-color: rgba(0,0,0,.5);
+}
+.border-dashed {
+  border: 1px dashed gray;
+  border-radius: 5px;
+  padding: 2px 1px;
+}
+.border-left-primary {
+  border-left: 0.25rem solid #4e73df !important;
+}
+.border-left-success {
+  border-left: 0.25rem solid #1cc88a !important;
+}
+.border-left-info {
+  border-left: 0.25rem solid #36b9cc !important;
+}
+.border-left-warning {
+  border-left: 0.25rem solid #f6c23e !important;
+}

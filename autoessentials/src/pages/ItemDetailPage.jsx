@@ -71,7 +71,7 @@ function ItemDetailPage() {
 							<div className="col-md-12 col-lg-6">
 								<div className="ms-3">
 									<h1>{itemDetail.title}</h1>
-									<h3 className="text-muted">{itemDetail.newPrice}</h3>
+									<h3 className="text-muted">$ {itemDetail.newPrice}</h3>
 									<p>Shope: {itemDetail.category}</p>
 									<p className="text-muted">Description: {itemDetail.description}</p>
 									<div className="input-group pt-3 w-25 d-flex">
